@@ -3,7 +3,7 @@ Arduino library for home automation and other device control tasks.
 
 A simple Example:
 
-(example_setup.jpg)
+(https://raw.githubusercontent.com/msedd/HomeAutomationKit/development/example_setup.jpg)
 
 ```c++
 	#include <Button.h>
