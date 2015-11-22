@@ -68,6 +68,7 @@ Typ(1B)Id(2B)Size(1B)Value(Size*B)[DeviceType(2B)]
 0xffff device 65535
 ```
 #### Device Type
+```
 0x0000 no type available
 0x0001 Lighting Fixtures
 0x0002 Tuneable White Lighting Fixtures
@@ -75,6 +76,7 @@ Typ(1B)Id(2B)Size(1B)Value(Size*B)[DeviceType(2B)]
 0x0004 RGBW Lighting Fixtures
 ...
 0xffff
+```
 #### Example
 ```c++
 // request the firmware meta data
