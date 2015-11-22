@@ -40,3 +40,21 @@ A simple Example:
 	  deviceManager->setValue(2000,value);
 	}
 ```
+
+### Protocol
+```
+Typ Id    Size  Value
+00  0000  00    0000...00
+
+
+
+**Type**
+
+0x00 get firmware
+0x01 get firmware response
+0x10 set value request
+0x20 get value request
+0x21 get value response
+0x30 broadcast devices meta data request
+0x31 broadcast devices response
+```
