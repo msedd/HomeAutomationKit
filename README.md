@@ -43,13 +43,13 @@ A simple Example:
 
 ### Protocol
 ```
-Typ Id    Size  Value
-00  0000  00    0000...00
+Typ(1B)Id(2B)Size(1B)Value(Size*B)
+```
 
 
+#### Types
 
-**Type**
-
+```
 0x00 get firmware
 0x01 get firmware response
 0x10 set value request
@@ -57,4 +57,19 @@ Typ Id    Size  Value
 0x21 get value response
 0x30 broadcast devices meta data request
 0x31 broadcast devices response
+```
+#### IDs
+```
+0x0000 all
+0x0001 device 1
+...
+0xffff device 65535
+```
+
+#### Example
+```
+// request the firmware meta data
+0x00000000
+// or short
+0x00
 ```
