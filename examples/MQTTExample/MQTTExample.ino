@@ -4,6 +4,7 @@
 #include <DeviceManager.h>
 #include <Button.h>
 #include <LED.h>
+#include <DeviceType.h>
 
 static byte MESSAGE_BROKER_IP[] = { 192, 168, 1, 100 };
 static int MESSAGE_BROKER_PORT = 1883;
@@ -50,13 +51,13 @@ enum {
 void setup() {                
 
   deviceManager = new DeviceManager();
-  Button* taster1 = new Button(DEVICEID_TASTER1, DIGITAL_IO6, handleEvent);
-  Button* taster2 = new Button(DEVICEID_TASTER2, DIGITAL_IO7, handleEvent);
+  Button* taster1 = new Button(0x1000, "Simple Button", 6, handleActorEvent);
+  Button* taster2 = new Button(0x1001, "Simple Button", 7, handleActorEvent);
 
-  LED* led1 = new LED(DEVICEID_LED1,DIGITAL_IO2);
-  LED* led2 = new LED(DEVICEID_LED2,DIGITAL_IO3);
-  LED* led3 = new LED(DEVICEID_LED3,DIGITAL_IO4);
-  LED* led4 = new LED(DEVICEID_LED4,DIGITAL_IO5);
+  LED* led1 = new LED(0x2000,"RGB LED Modul", 2);
+  LED* led2 = new LED(0x2001,"RGB LED Modul", 3);
+  LED* led3 = new LED(0x2002,"RGB LED Modul", 4);
+  LED* led4 = new LED(0x2003,"RGB LED Modul", 5);
 
   deviceManager->addSensor(taster1->getID(), taster1);
   deviceManager->addSensor(taster2->getID(), taster2);
@@ -78,7 +79,7 @@ void loop() {
 }
 
 
-void handleEvent(int sensorID, int value) {
+void handleActorEvent(int sensorID, int value) {
   char buffer[10];
   sprintf(buffer, "[%d,%d]", sensorID, value);
 

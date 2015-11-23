@@ -7,8 +7,8 @@
 
 #include "Sensor.h"
 
-Sensor::Sensor(int sensorID, SENSOR_CALLBACK_SIGNATURE) :
-		Device(sensorID) {
+Sensor::Sensor(int sensorID, const char *name, DeviceType::types type, SENSOR_CALLBACK_SIGNATURE) :
+		Device(sensorID,name, type) {
 	lastValue = 0;
 	this->callback = callback;
 }

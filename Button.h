@@ -12,7 +12,7 @@
 
 class Button : public Sensor {
 public:
-	Button(int, int, SENSOR_CALLBACK_SIGNATURE);
+    Button(int, const char*,int, SENSOR_CALLBACK_SIGNATURE);
 	virtual ~Button();
 protected:
 	virtual int readValue();

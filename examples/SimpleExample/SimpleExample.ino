@@ -1,18 +1,19 @@
 #include <Button.h>
 #include <DeviceManager.h>
 #include <LED.h>
+#include <DeviceType.h>
 
 DeviceManager* deviceManager;
 
 void setup() {
   deviceManager = new DeviceManager();
-  Button* b1 = new Button(1000, 6, handleActorEvent);
-  Button* b2 = new Button(1001, 7, handleActorEvent);
+  Button* b1 = new Button(0x1000, "Simple Button", 6, handleActorEvent);
+  Button* b2 = new Button(0x1001, "Simple Button", 7, handleActorEvent);
 
-  LED* led1 = new LED(2000,2);
-  LED* led2 = new LED(2001,3);
-  LED* led3 = new LED(2002,4);
-  LED* led4 = new LED(2003,5);
+  LED* led1 = new LED(0x2000,"RGB LED Modul", 2);
+  LED* led2 = new LED(0x2001,"RGB LED Modul", 3);
+  LED* led3 = new LED(0x2002,"RGB LED Modul", 4);
+  LED* led4 = new LED(0x2003,"RGB LED Modul", 5);
 
   deviceManager->addSensor(b1->getID(), b1);
   deviceManager->addSensor(b2->getID(), b2);

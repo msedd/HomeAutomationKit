@@ -7,7 +7,7 @@
 
 #include "Actor.h"
 
-Actor::Actor(int sensorID):Device (sensorID){
+Actor::Actor(int sensorID, const char *name,DeviceType::types type):Device (sensorID,name,type){
 
 
 }

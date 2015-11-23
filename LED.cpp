@@ -7,8 +7,8 @@
 
 #include "LED.h"
 
-LED::LED(int sensorID, int port) :
-		Actor(sensorID) {
+LED::LED(int sensorID, const char *name, int port) :
+Actor(sensorID, name, DeviceType::LED) {
 	digitalPort = port;
 	pinMode(digitalPort, OUTPUT);
 	digitalWrite(digitalPort, LOW);

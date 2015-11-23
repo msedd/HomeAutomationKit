@@ -11,7 +11,7 @@
 #include "Actor.h"
 class LED: public Actor {
 public:
-	LED(int, int);
+	LED(int, const char*, int);
 	virtual ~LED();
 	virtual void writeValue(int);
 

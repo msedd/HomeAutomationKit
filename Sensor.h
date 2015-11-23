@@ -14,7 +14,7 @@
 
 class Sensor : public Device {
 public:
-	Sensor(int, SENSOR_CALLBACK_SIGNATURE);
+    Sensor(int, const char*,DeviceType::types, SENSOR_CALLBACK_SIGNATURE);
 	virtual ~Sensor();
 	void readAndDispatch();
 

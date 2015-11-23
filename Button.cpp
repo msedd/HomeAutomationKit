@@ -7,8 +7,8 @@
 
 #include "Button.h"
 
-Button::Button(int sensorID, int port, SENSOR_CALLBACK_SIGNATURE) :
-		Sensor(sensorID,callback) {
+Button::Button(int sensorID,const char *name, int port, SENSOR_CALLBACK_SIGNATURE) :
+Sensor(sensorID,name,DeviceType::NO_TYPE_AVAILABLE,callback) {
 	digitalPort = port;
 	pinMode(digitalPort, INPUT);
 }
