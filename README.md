@@ -1,5 +1,6 @@
 # HomeAutomationKit
 Arduino library for home automation and other device control tasks.
+This Library provides an object oriented device management and implements an application protocol. You can combine this with any transport protocol like MQTT or Bluetooth LE.
 
 A simple Example:
 
@@ -70,10 +71,10 @@ Typ(1B)Id(2B)Size(1B)Value(Size*B)[DeviceType(2B)]
 #### Device Type
 ```
 0x0000 no type available
-0x0001 Lighting Fixtures
-0x0002 Tuneable White Lighting Fixtures
-0x0003 RGB Lighting Fixtures
-0x0004 RGBW Lighting Fixtures
+0x0001 LED Light Fixture
+0x0002 LED Light Fixture (dimmable)
+0x0003 RGB LED Light Fixture (predefined color)
+0x0004 RGB LED Light Fixture (predefined color, dimmable)
 ...
 0xffff
 ```
@@ -101,7 +102,7 @@ Typ(1B)Id(2B)Size(1B)Value(Size*B)[DeviceType(2B)]
 
 // a broadcast message of the device meta data
 // name = "RGB LED Modul"
-// device type = "RGB Lighting Fixtures"
-0 x 33 11F0 0e 524742204c4544204d6f64756c20 0003
+// device type = "RGB LED Light Fixture (predefined color, dimmable)"
+0 x 33 11F0 0e 524742204c4544204d6f64756c20 0004
 
 ```
