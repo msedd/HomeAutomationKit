@@ -5,16 +5,19 @@
  *      Author: mse
  */
 
-#define SENSOR_CALLBACK_SIGNATURE void (*callback)(int, int)
+
 
 #ifndef SENSOR_H_
 #define SENSOR_H_
 
 #include "Device.h"
+#define SENSOR_CALLBACK_SIGNATURE void (*callback)(Protocol)
+
+
 
 class Sensor : public Device {
 public:
-    Sensor(int, const char*,DeviceType::types, SENSOR_CALLBACK_SIGNATURE);
+    Sensor(uint16_t, const char*,DeviceType::types, SENSOR_CALLBACK_SIGNATURE);
 	virtual ~Sensor();
 	void readAndDispatch();
 

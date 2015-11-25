@@ -11,7 +11,7 @@
 #include "Device.h"
 class Actor: public Device {
 public:
-    Actor(int, const char*, DeviceType::types);
+    Actor(uint16_t, const char*, DeviceType::types);
 	virtual ~Actor();
 
 	virtual void writeValue(int)=0;

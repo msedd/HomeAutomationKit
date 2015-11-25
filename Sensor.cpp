@@ -7,8 +7,8 @@
 
 #include "Sensor.h"
 
-Sensor::Sensor(int sensorID, const char *name, DeviceType::types type, SENSOR_CALLBACK_SIGNATURE) :
-		Device(sensorID,name, type) {
+Sensor::Sensor(uint16_t deviceID, const char *name, DeviceType::types type, SENSOR_CALLBACK_SIGNATURE) :
+		Device(deviceID,name, type) {
 	lastValue = 0;
 	this->callback = callback;
 }
@@ -32,6 +32,9 @@ bool Sensor::hasChanged() {
 }
 void Sensor::sendEvent(int value) {
 	char buffer[10];
-	sprintf(buffer, "[%d,%d]", getID(), value);
-	callback(getID(), value);
+	sprintf(buffer, "[%d,%d]", getDeviceID(), value);
+    Protocol msg;
+    msg.id = getDeviceID();
+    msg.deviceType = getDeviceType();
+	callback(msg);
 }

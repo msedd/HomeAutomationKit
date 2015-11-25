@@ -12,6 +12,8 @@
 #include "Actor.h"
 #include "CList.h"
 
+
+
 class DeviceManager {
 public:
 	DeviceManager();

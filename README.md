@@ -44,7 +44,7 @@ A simple Example:
 
 ### Protocol
 ```
-Typ(1B)Id(2B)Size(1B)Value(Size*B)[DeviceType(2B)]
+Typ(1B)Id(2B)DeviceType(2B)Data(19B)
 ```
 
 
@@ -105,4 +105,5 @@ Typ(1B)Id(2B)Size(1B)Value(Size*B)[DeviceType(2B)]
 // device type = "RGB LED Light Fixture (predefined color, dimmable)"
 0 x 33 11F0 0e 524742204c4544204d6f64756c20 0004
 
+RGB LED Modul
 ```

@@ -11,22 +11,40 @@
 #include <Arduino.h>
 #include "DeviceType.h"
 
+
+typedef struct {
+    uint8_t type;
+    uint16_t id;
+    uint16_t deviceType;
+    char data[19];
+} Protocol;
+
 class Device {
 public:
-    Device(int sensorID, const char *name,DeviceType::types type) {
-		id = sensorID;
+    /*
+    struct Protocol {
+        uint8_t type;
+        uint16_t id;
+        uint16_t deviceType;
+        char data[19];
+    };
+     */
+    
+    Device(uint16_t deviceID, const char *name,DeviceType::types type) {
+		id = deviceID;
         deviceType = type;
         deviceName = name;
 	}
 	virtual ~Device() {
 	}
-	int getID() {
+	uint16_t getDeviceID() {
 		return id;
 	}
-
-
+    DeviceType::types getDeviceType() {
+        return deviceType;
+    }
 private:
-	int id;
+	uint16_t id;
     DeviceType::types deviceType;
     const char *deviceName;
 };
