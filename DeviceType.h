@@ -8,9 +8,11 @@
 #ifndef DEVICETYPE_H_
 #define DEVICETYPE_H_
 
-class DeviceType  {
+
+class DeviceTypes  {
 public:
-    enum types
+    
+    enum type
     {
         NO_TYPE_AVAILABLE=0x0000,
         LED=0x0001,
@@ -18,6 +20,7 @@ public:
         RGB_LED_PREDEFINED_COLOR=0x0003,
         RGB_LED_PREDEFINED_DIMMABLE=0x0004
     };
+    
 };
 
 #endif /* DEVICETYPE_H_ */

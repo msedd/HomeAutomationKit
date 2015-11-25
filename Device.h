@@ -21,16 +21,7 @@ typedef struct {
 
 class Device {
 public:
-    /*
-    struct Protocol {
-        uint8_t type;
-        uint16_t id;
-        uint16_t deviceType;
-        char data[19];
-    };
-     */
-    
-    Device(uint16_t deviceID, const char *name,DeviceType::types type) {
+    Device(uint16_t deviceID, const char *name,Types::deviceType type) {
 		id = deviceID;
         deviceType = type;
         deviceName = name;
@@ -40,12 +31,12 @@ public:
 	uint16_t getDeviceID() {
 		return id;
 	}
-    DeviceType::types getDeviceType() {
+    Types::deviceType getDeviceType() {
         return deviceType;
     }
 private:
 	uint16_t id;
-    DeviceType::types deviceType;
+    Types::deviceType deviceType;
     const char *deviceName;
 };
 
