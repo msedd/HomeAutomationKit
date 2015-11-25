@@ -9,7 +9,7 @@
 #define DEVICE_H_
 
 #include <Arduino.h>
-#include "DeviceType.h"
+#include "Types.h"
 
 
 typedef struct {
@@ -21,7 +21,7 @@ typedef struct {
 
 class Device {
 public:
-    Device(uint16_t deviceID, const char *name,Types::deviceType type) {
+    Device(uint16_t deviceID, const char *name,DeviceTypes::type type) {
 		id = deviceID;
         deviceType = type;
         deviceName = name;
@@ -31,12 +31,12 @@ public:
 	uint16_t getDeviceID() {
 		return id;
 	}
-    Types::deviceType getDeviceType() {
+    DeviceTypes::type getDeviceType() {
         return deviceType;
     }
 private:
 	uint16_t id;
-    Types::deviceType deviceType;
+    DeviceTypes::type deviceType;
     const char *deviceName;
 };
 

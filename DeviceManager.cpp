@@ -44,3 +44,15 @@ void DeviceManager::setValue(int id, int value) {
 	}
 
 }
+void DeviceManager::handleProtocolMessage(uint8_t msg[]){
+
+    Protocol protocol; //Re-make the struct
+    memcpy(&protocol, msg, sizeof(msg));
+}
+
+uint8_t* DeviceManager::transformToProtocolMessage(Protocol protocol){
+    
+    uint8_t msg[sizeof(protocol)];
+    memcpy(msg, &protocol, sizeof(protocol));
+    return msg;
+}

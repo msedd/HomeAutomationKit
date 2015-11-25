@@ -7,7 +7,7 @@
 
 #include "Sensor.h"
 
-Sensor::Sensor(uint16_t deviceID, const char *name, Types::deviceType type, SENSOR_CALLBACK_SIGNATURE) :
+Sensor::Sensor(uint16_t deviceID, const char *name, DeviceTypes::type type, SENSOR_CALLBACK_SIGNATURE) :
 		Device(deviceID,name, type) {
 	lastValue = 0;
 	this->callback = callback;
@@ -36,6 +36,8 @@ void Sensor::sendEvent(int value) {
     Protocol msg;
     msg.id = getDeviceID();
     msg.deviceType = getDeviceType();
-    //msg.type = Types:
+    msg.type = ProtocolTypes::DEVICE_VALUE_BROADCAST;
+    memset(msg.data,0,sizeof(msg.data));
+    msg.data[0]=value;
 	callback(msg);
 }

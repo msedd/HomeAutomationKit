@@ -23,6 +23,8 @@ public:
 	void addActor(int deviceID, Actor* actor);
 	void onLoop();
 	void setValue(int,int);
+    void handleProtocolMessage(uint8_t[]);
+    uint8_t* transformToProtocolMessage(Protocol protocol);
 private:
 	CList sensorList;
 	CList actorList;
