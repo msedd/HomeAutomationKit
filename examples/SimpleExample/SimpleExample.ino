@@ -68,67 +68,11 @@ void handleSensorEvent(Protocol protocolEvent) {
   Serial.print(protocolEvent.data[0],HEX);
   Serial.print("\n");
 
-  //testStruct();
-
 
   if(protocolEvent.id == 1000)
     deviceManager->setValue(2000,0);
   else
     deviceManager->setValue(2001,1);
-}
-
-
-void testStruct(){
-
-  //0 x 33 11F0 0e 524742204c4544204d6f64756c20 0004 
-  Protocol meta;
-
-  meta.type = 0x33;
-  meta.id = 0x11F0;
-  meta.deviceType = 0x0004;
-
-  memset(meta.data,0,sizeof(meta.data));
-  sprintf(meta.data, "%s", "Marko");
-  //meta.data = "dsasddsasddsasdww";
-
-  //Sending Side
-  uint8_t b[sizeof(meta)];
-  memcpy(b, &meta, sizeof(meta));
-
-  PrintHex8(b,sizeof(b));
-  Serial.print("\n");
-
-  //Receiving Side
-  Protocol tmp; //Re-make the struct
-  memcpy(&tmp, b, sizeof(tmp));
-
-  Serial.print(tmp.type,HEX);
-  Serial.print("\n");
-
-  Serial.print(tmp.id,HEX);
-  Serial.print("\n");
-
-  Serial.print(tmp.deviceType,HEX);
-  Serial.print("\n");
-
-  Serial.print(tmp.data);
-  Serial.print("\n");
-
-}
-
-void PrintHex8(uint8_t *data, uint8_t length) // prints 8-bit data in hex with leading zeroes
-{
-
-  Serial.print(length); 
-  Serial.print("\n"); 
-  Serial.print("0x"); 
-  for (int i=0; i<length; i++) { 
-    if (data[i]<0x10) {
-      Serial.print("0");
-    } 
-    Serial.print(data[i],HEX); 
-    Serial.print(" "); 
-  }
 }
 
 
