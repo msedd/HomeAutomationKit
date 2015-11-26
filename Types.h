@@ -10,6 +10,7 @@
 
 #define PROTOCOL_SIZE 24
 
+const char FIRMWARE_NAME_VERSION[19]= "HOMATIK:1.0.23    ";
 
 class DeviceTypes  {
 public:

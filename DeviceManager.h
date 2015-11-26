@@ -12,11 +12,11 @@
 #include "Actor.h"
 #include "CList.h"
 
-
+#define CALLBACK_SIGNATURE void (*callback)(Protocol)
 
 class DeviceManager {
 public:
-	DeviceManager();
+	DeviceManager(CALLBACK_SIGNATURE);
 	virtual ~DeviceManager();
 
 	void addSensor(int deviceID, Sensor* sensor);
@@ -28,6 +28,9 @@ public:
 private:
 	CList sensorList;
 	CList actorList;
+    SENSOR_CALLBACK_SIGNATURE;
+    
+    void sendFirmwareResponse();
 };
 
 #endif /* DEVICEMANAGER_H_ */

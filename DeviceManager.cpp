@@ -7,8 +7,8 @@
 
 #include "DeviceManager.h"
 
-DeviceManager::DeviceManager() {
-
+DeviceManager::DeviceManager(CALLBACK_SIGNATURE) {
+    this->callback = callback;
 }
 
 DeviceManager::~DeviceManager() {
@@ -51,7 +51,8 @@ void DeviceManager::handleProtocolMessage(uint8_t msg[]){
     
     switch (protocol.type){
         case ProtocolTypes::FIRMWARE_REQ:
-            Serial.println("FIRMWARE_REQ");
+            Serial.println("receive FIRMWARE_REQ -> send FIRMWARE_RES");
+            sendFirmwareResponse();
             break;
         case ProtocolTypes::ACTIVATE_DEVICE_BROADCAST:
             Serial.println("ACTIVATE_DEVICE_BROADCAST");
@@ -85,9 +86,25 @@ void DeviceManager::handleProtocolMessage(uint8_t msg[]){
     Serial.print("\n");
 }
 
+void DeviceManager::sendFirmwareResponse(){
+    
+    Protocol protocol;
+    protocol.deviceType=DeviceTypes::NO_TYPE_AVAILABLE;
+    protocol.id = 0x0000;
+    //memset(protocol.data,0,sizeof(protocol.data));
+    //protocol.data = FIRMWARE_NAME_VERSION;
+    memcpy(protocol.data, &FIRMWARE_NAME_VERSION, sizeof(FIRMWARE_NAME_VERSION));
+    protocol.type=ProtocolTypes::FIRMWARE_RES;
+    
+    
+    callback(protocol);
+    
+}
+
 uint8_t* DeviceManager::transformToProtocolMessage(Protocol protocol){
     
     uint8_t msg[sizeof(protocol)];
+    memset(msg,0,sizeof(msg));
     memcpy(msg, &protocol, sizeof(protocol));
     return msg;
 }
