@@ -1,9 +1,9 @@
-/*
- * DeviceManager.h
- *
- *  Created on: 14.02.2013
- *      Author: mse
- */
+/*************************************************************************
+ * Arduino Library for Home Automation and Device Control
+ * Distributed under Apache 2 License (http://www.apache.org/licenses/)
+ * Visit http://marko-seifert.de/blog/?page_id=1042 for more information.
+ * (C) Marko Seifert (DeveloperPodcast)
+ *************************************************************************/
 
 #ifndef DEVICEMANAGER_H_
 #define DEVICEMANAGER_H_
@@ -25,6 +25,7 @@ public:
 	void setValue(int,int);
     void handleProtocolMessage(uint8_t*);
     uint8_t* transformToProtocolMessage(Protocol protocol);
+    void transformToProtocolMessage(uint8_t *buffer, Protocol *protocol);
 private:
 	CList sensorList;
 	CList actorList;

@@ -1,9 +1,10 @@
-/*
- * CList.cpp
- *
- *  Created on: 25.05.2012
- *      Author: mse
- */
+/*************************************************************************
+ * Arduino Library for Home Automation and Device Control
+ * Distributed under Apache 2 License (http://www.apache.org/licenses/)
+ * Visit http://marko-seifert.de/blog/?page_id=1042 for more information.
+ * (C) Marko Seifert (DeveloperPodcast)
+ *************************************************************************/
+
 #include "CList.h"
 
 CList::CList() {

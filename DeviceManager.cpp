@@ -1,9 +1,9 @@
-/*
- * DeviceManager.cpp
- *
- *  Created on: 14.02.2013
- *      Author: mse
- */
+/*************************************************************************
+ * Arduino Library for Home Automation and Device Control
+ * Distributed under Apache 2 License (http://www.apache.org/licenses/)
+ * Visit http://marko-seifert.de/blog/?page_id=1042 for more information.
+ * (C) Marko Seifert (DeveloperPodcast)
+ *************************************************************************/
 
 #include "DeviceManager.h"
 
@@ -137,6 +137,41 @@ void DeviceManager::sendFirmwareResponse(){
     
     callback(protocol);
     
+}
+
+void DeviceManager::transformToProtocolMessage(uint8_t* buffer, Protocol* protocol){
+    
+    if(true){
+        Serial.print("type: 0x");
+        Serial.print(protocol->type,HEX);
+        Serial.print("\n");
+        
+        Serial.print("id: 0x");
+        Serial.print(protocol->id,HEX);
+        Serial.print("\n");
+        
+        Serial.print("deviceType: 0x");
+        Serial.print(protocol->deviceType,HEX);
+        Serial.print("\n");
+        
+        Serial.print("data: ");
+        Serial.print(protocol->data);
+        Serial.print("\n");
+        Serial.print("data: 0x");
+        Serial.print(protocol->data[0],HEX);
+        Serial.print("\n");
+    }
+    
+    memset(buffer,0,PROTOCOL_SIZE);
+    memcpy(buffer, protocol, PROTOCOL_SIZE);
+    
+    if(true){
+        Serial.print("msg: 0x");
+        for(int i = 0; i< PROTOCOL_SIZE; i++){
+            Serial.print(buffer[i],HEX);
+        }
+        Serial.print("\n");
+    }
 }
 
 uint8_t* DeviceManager::transformToProtocolMessage(Protocol protocol){
