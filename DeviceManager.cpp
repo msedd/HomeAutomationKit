@@ -44,16 +44,49 @@ void DeviceManager::setValue(int id, int value) {
 	}
 
 }
-void DeviceManager::handleProtocolMessage(uint8_t msg[]){
+void DeviceManager::handleProtocolMessage(uint8_t *msg){
+    
+    
+    if(true){
+        Serial.print("msg: 0x");
+        for(int i = 0; i< PROTOCOL_SIZE; i++){
+            Serial.print(msg[i],HEX);
+        }
+        Serial.print("\n");
+    }
 
     Protocol protocol; //Re-make the struct
-    memcpy(&protocol, msg, sizeof(msg));
+    memcpy(&protocol, msg, PROTOCOL_SIZE);
+    
+    Serial.print("type: 0x");
+    Serial.print(protocol.type,HEX);
+    Serial.print("\n");
+    
+    Serial.print("id: 0x");
+    Serial.print(protocol.id,HEX);
+    Serial.print("\n");
+    
+    Serial.print("deviceType: 0x");
+    Serial.print(protocol.deviceType,HEX);
+    Serial.print("\n");
+    
+    Serial.print("data: ");
+    Serial.print(protocol.data);
+    Serial.print("\n");
+    Serial.print("data: 0x");
+    Serial.print(protocol.data[0],HEX);
+    Serial.print("\n");
     
     switch (protocol.type){
         case ProtocolTypes::FIRMWARE_REQ:
             Serial.println("receive FIRMWARE_REQ -> send FIRMWARE_RES");
             sendFirmwareResponse();
             break;
+        case ProtocolTypes::SET_DEVICE_VALUE:
+            Serial.println("SET_DEVICE_VALUE");
+            setValue(protocol.id, protocol.data[0]);
+            break;
+
         case ProtocolTypes::ACTIVATE_DEVICE_BROADCAST:
             Serial.println("ACTIVATE_DEVICE_BROADCAST");
             break;
@@ -71,17 +104,22 @@ void DeviceManager::handleProtocolMessage(uint8_t msg[]){
             
     }
     
+    Serial.print("type: 0x");
     Serial.print(protocol.type,HEX);
     Serial.print("\n");
     
+    Serial.print("id: 0x");
     Serial.print(protocol.id,HEX);
     Serial.print("\n");
     
+    Serial.print("deviceType: 0x");
     Serial.print(protocol.deviceType,HEX);
     Serial.print("\n");
     
+    Serial.print("data: ");
     Serial.print(protocol.data);
     Serial.print("\n");
+    Serial.print("data: 0x");
     Serial.print(protocol.data[0],HEX);
     Serial.print("\n");
 }
@@ -103,8 +141,37 @@ void DeviceManager::sendFirmwareResponse(){
 
 uint8_t* DeviceManager::transformToProtocolMessage(Protocol protocol){
     
-    uint8_t msg[sizeof(protocol)];
-    memset(msg,0,sizeof(msg));
-    memcpy(msg, &protocol, sizeof(protocol));
+    if(true){
+    Serial.print("type: 0x");
+    Serial.print(protocol.type,HEX);
+    Serial.print("\n");
+    
+    Serial.print("id: 0x");
+    Serial.print(protocol.id,HEX);
+    Serial.print("\n");
+    
+    Serial.print("deviceType: 0x");
+    Serial.print(protocol.deviceType,HEX);
+    Serial.print("\n");
+    
+    Serial.print("data: ");
+    Serial.print(protocol.data);
+    Serial.print("\n");
+    Serial.print("data: 0x");
+    Serial.print(protocol.data[0],HEX);
+    Serial.print("\n");
+    }
+    
+    uint8_t msg[PROTOCOL_SIZE];
+    memset(msg,0,PROTOCOL_SIZE);
+    memcpy(msg, &protocol, PROTOCOL_SIZE);
+    
+    if(true){
+    Serial.print("msg: 0x");
+    for(int i = 0; i< sizeof(msg); i++){
+        Serial.print(msg[i],HEX);
+    }
+    Serial.print("\n");
+    }
     return msg;
 }

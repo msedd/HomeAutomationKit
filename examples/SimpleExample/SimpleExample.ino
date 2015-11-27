@@ -26,65 +26,36 @@ void setup() {
   deviceManager->addActor(led4->getDeviceID(),led4);
 }
 
-int counter = 0;
-Protocol protocol;
+uint8_t FIRMWARE_REQ_MESSAGE[] = {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0};
+uint8_t SET_DEVICE_VALUE_MESSAGE1[] = {0x10,0x00,0x20,0x00,0x00,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+uint8_t SET_DEVICE_VALUE_MESSAGE2[] = {0x10,0x01,0x20,0x00,0x00,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+uint8_t SET_DEVICE_VALUE_MESSAGE3[] = {0x10,0x02,0x20,0x00,0x00,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+uint8_t SET_DEVICE_VALUE_MESSAGE4[] = {0x10,0x03,0x20,0x00,0x00,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
 void loop()
 {
   deviceManager->onLoop();
 
-
-  protocol.deviceType = DeviceTypes::NO_TYPE_AVAILABLE;
-  memset(protocol.data,0,sizeof(protocol.data));
-
-  uint8_t* buff;
-
   if(Serial.available() > 0){
     char c = Serial.read();
-    Serial.print(c);
-    switch (c){
-    case 'f':
-      protocol.type = ProtocolTypes::FIRMWARE_REQ;
-      protocol.id = 0x0000;
-      buff = deviceManager->transformToProtocolMessage(protocol);
-      PrintHex8(buff,sizeof(buff));
-      deviceManager->handleProtocolMessage(buff);
-      break;
-    case '1':
-      break;
-
-    case '2':
-      break;
-
-    case '3':
-      break;
-
-    case '4':
-      break;
-
-    default:
-      return;
+    if(c == 'f'){
+      deviceManager->handleProtocolMessage(FIRMWARE_REQ_MESSAGE);
+    }else if(c == '1') {
+      deviceManager->handleProtocolMessage(SET_DEVICE_VALUE_MESSAGE1);
+    }else if(c == '2') {
+      deviceManager->handleProtocolMessage(SET_DEVICE_VALUE_MESSAGE2);
+    }else if(c == '3') {
+      deviceManager->handleProtocolMessage(SET_DEVICE_VALUE_MESSAGE3);
+    }else if(c == '4') {
+      deviceManager->handleProtocolMessage(SET_DEVICE_VALUE_MESSAGE4);
     }
   }
 }
 
-void PrintHex8(uint8_t *data, uint8_t length) // prints 8-bit data in hex with leading zeroes
-{
-
-  Serial.print(length); 
-  Serial.print("\n"); 
-  Serial.print("0x"); 
-  for (int i=0; i<length; i++) { 
-    if (data[i]<0x10) {
-      Serial.print("0");
-    } 
-    Serial.print(data[i],HEX); 
-    Serial.print(" "); 
-  }
-}
-
-
 void handleSensorEvent(Protocol protocolEvent) {
 
+  Serial.print("-------------------\n");
+  Serial.print("Receiving Event\n");
+  Serial.print("-------------------\n");
   Serial.print(protocolEvent.type,HEX);
   Serial.print("\n");
 
@@ -97,13 +68,15 @@ void handleSensorEvent(Protocol protocolEvent) {
   Serial.print(protocolEvent.data);
   Serial.print("\n");
   Serial.print(protocolEvent.data[0],HEX);
+  Serial.print(protocolEvent.data[1],HEX);
+  Serial.print(protocolEvent.data[2],HEX);
   Serial.print("\n");
+  Serial.print("-------------------\n");
 
-
-  if(protocolEvent.id == 1000)
-    deviceManager->setValue(2000,0);
+  if(protocolEvent.id == 0x1000)
+    deviceManager->setValue(0x2001,1);
   else
-    deviceManager->setValue(2001,1);
+    deviceManager->setValue(0x2001,0);
 }
 
 
